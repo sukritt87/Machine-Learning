@@ -1,2 +1,2 @@
 # Machine-Learning
-Practice Machine Learning (Regression/Classification/Market BAske Analysis)
+Practice Machine Learning (Regression/Classification/Market Basket Analysis)

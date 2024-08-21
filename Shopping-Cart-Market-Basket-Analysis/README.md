@@ -1,4 +1,4 @@
-# Instacart Market Basket Analysis
+# Market Basket Analysis - Online Shopping Data
 
 ## Introduction
 
@@ -54,7 +54,7 @@ Instacart is an American technology company that operates as a same-day grocery 
 
 
 ## Exploratory Data Analysis
-For the analysis I combined all of the separate data files into one single dataframe and to fit the dataframe in my memory I reduced its size to 50% (4.1 GB to 2.0 GB) by type conversion and without loosing any information.
+For the analysis I combined all of the separate data files into one single dataframe and to fit the dataframe in my memory I reduced its size by approximately 50% (4.1 GB to 2.0 GB) using type conversion and without loosing any information.
 
 - As we can see in below plot that the reorder percentage of day-to-day food items is high and for other products such as vitamins, first-aids, beauty products, etc. reorder percentage is low. This is true as we buy only groceries regularly and do not buy those items in every order.
 

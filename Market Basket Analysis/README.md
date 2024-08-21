@@ -1,6 +1,5 @@
 # Market-Basket-Analysis of
 1. Grocery Dataset
-2. Online Retail
 
 ## Business Value
 
@@ -19,29 +18,6 @@ __Grocery data__
 ![](Images/Grocery%20data.PNG)
 
 Each row of data represents a transaction and the attributes the product purchased. For value 0 the attribute item has not been purchased, for value the attribute item has been purchased in that particular transaction
-
-__Online Retail__
-
-![](Images/Online%20Retail.PNG)
-
-Each row of data represents a transaction for a particular item and the attributes correspond to the following:
-
-__InvoiceNo__ : Unique identifier for transaction 
-
-__StockCode__ : Unique identifier for the stock item being purchased
-
-__Description__ : Description of item
-
-__Quantity__ : Number of units purchased
-
-__InvoiceDate__ : Date of purchase
-
-__UnitPrice__ : Cost of one unit of the item
-
-__CustomerID__ : Unique Identifier for customer 
-
-__Country__ : Country of transaction
-
 
 ## Approach
 
@@ -83,26 +59,6 @@ __Association Rules__
 
 ![](Images/Grocery%20Rules.PNG)
 
-### Online Retail Dataset
-
-__Processed Data__
-
-![](Images/Clean%20Online%20Retail.PNG)
-
-__Association Rules__
-
-![](Images/Online%20Rules.PNG)
-
-__Selected Rules__
-
-![](Images/Selected%20Rules.PNG)
-
-## __Conclusion__
-
 __Grocery Dataset__
 
 The rules states that people who bought _other vegetables_ are likely to purchase _root vegetables_ and the Confidence of the rule is 46% which means 46% of the time people bought _other vegetables_ they also bought _root vegetables_ and the Lift for the given rule is 2.24 which means the probability of finding the _root vegetables_ in the transactions having _other vegetables_ is greater than the normal probability of finding the it had the two items been not associated. A lift value of 1 indicates absence of association between the two items.
-
-__Online Dataset__
-
-Understanding the rules for this dataset we see _SET/6 RED SPOTTY PAPER PLATES_ has a confidence of 80% and lift of 6.03 with itemset _SET/20 RED RETROSPOT PAPER NAPKINS_ which means 80% of the times when the latter item was bought _SET/6 RED SPOTTY PAPER PLATES_ was also bought. 

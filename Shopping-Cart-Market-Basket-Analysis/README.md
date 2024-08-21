@@ -56,19 +56,11 @@ Instacart is an American technology company that operates as a same-day grocery 
 ## Exploratory Data Analysis
 For the analysis I combined all of the separate data files into one single dataframe and to fit the dataframe in my memory I reduced its size by approximately 50% (4.1 GB to 2.0 GB) using type conversion and without loosing any information.
 
-- As we can see in below plot that the reorder percentage of day-to-day food items is high and for other products such as vitamins, first-aids, beauty products, etc. reorder percentage is low. This is true as we buy only groceries regularly and do not buy those items in every order.
-
-
-- We can see that there are less number of organic products but their Mean reorder percentage is high. This tells us that we should have more organic products in the store.
-
-- We can see that the total unique users of products having highest reorder ratio are only few (1-15 only). This means that these users like these products and would buy regularly.
-
-
 ## Customer Segmentation
 
 Customer segmentation is the process of dividing customers into groups based on common characteristics so companies can market to each group effectively and appropriately. We can perform segmentation using the data of which products users buy. Since there are thousonds of products and also thousands of customers, I utilized aisles which represent categories of products. 
 
-I then performed Principal component analysis to reduce dimensions as KMeans does not produce good results on higher dimensions. Using 10 principal components I carried out KMeans clustering. I chose optimal number of clusters as 5 using Elbow method shown below.
+I then performed Principal component analysis to reduce dimensions as KMeans clustering does not produce good results on higher dimensions. Using first 10 principal components I carried out KMeans clustering. I chose optimal number of clusters as 5 using Elbow method.
 
 
 The clustering results into 5 neat clusters and after checking most frequent products in them, we can conclude following:
@@ -124,68 +116,6 @@ I utilized apriori algorithm from Mlxtend python library and found out associati
 | Organic Hass Avocado | Bag of Organic Bananas | 1.81 |
 | Honeycrisp Apple | Banana | 1.77 |
 | Organic Avocado | Organic Baby Spinach | 1.70 |
-
-## ML Model to Predict Product Reorders
-
-We can utilize this anonymized transactional data of customer orders over time to predict which previously purchased products will be in a user’s next order. This would help recommend the products to a user. 
-
-To build a model, I need to extract features from previous order to understand user's purchase pattern and how popular the particular product is. I extract following features from the user's transactional data.
-
-**Product Level Features:** To understand the product's popularity among users
-```
-(1) Product's average add-to-cart-order
-(2) Total times the product was ordered
-(3) Total times the product was reordered
-(4) Reorder percentage of a product
-(5) Total unique users of a product
-(6) Is the product Organic?
-(7) Percentage of users that buy the product second time
-```
-
-**Aisle and Department Level Features:** To capture if a department and aisle are related to day-to-day products (vegetables, fruits, soda, water, etc.) or once-in-a-while products (medicines, personal-care, etc.) 
-```
-(8) Reorder percentage, Total orders and reorders of a product aisle
-(9) Mean and std of aisle add-to-cart-order
-(10) Aisle unique users
-(10) Reorder percentage, Total orders and reorders of a product department
-(11) Mean and std of department add-to-cart-order
-(12) Department unique users
-(13) Binary encoding of aisle feature (Because one-hot encoding results in many features and make datarame sparse)
-(14) Binary encoding of department feature (Because one-hot encoding results in many features and make datarame sparse)
-```
-
-**User Level features:** To capture user's purchase pattern and behavior
-```
-(15) User's average and std day-of-week of order
-(16) User's average and std hour-of-day of order
-(17) User's average and std days-since-prior-order
-(18) Total orders by a user
-(19) Total products user has bought
-(20) Total unique products user has bought
-(21) user's total reordered products
-(22) User's overall reorder percentage
-(23) Average order size of a user
-(24) User's mean of reordered items of all orders
-(25) Percentage of reordered itmes in user's last three orders
-(26) Total orders in user's last three orders
-```
-
-**User-product Level Features:** To capture user's pattern of ordering-reordering specific products 
-```
-(27) User's avg add-to-cart-order for a product
-(28) User's avg days_since_prior_order for a product
-(29) User's product total orders, reorders and reorders percentage
-(30) User's order number when the product was bought last
-(31) User's product purchase history of last three orders
-```
-
-### ML Models
-
-Using the extracted features, I prepared a dataframe which shows all the products user has bought previously, user level features, product level features, asile and department level features, user-product level features and the information of current order such as order's day-of-week, hour-of-day, etc. The Traget would be 'reordered' which shows how many of the previously purchased items, user ordered this time. 
-
-Since the dataframe is huge, I reduced the memory consumption of it by downcasting to fit the data int my memory. I preferred MinMaxScaler over StandardScaler as the latter requires 16 GB of RAM for its operation. I followed standard process for model building and I relied on XGBoost as it handles large data, can be parallelized and gives feature importance. I also built Neural Network to see what would be the best performance from this model disregarding some inherent randomness from both of these models.  To balance the data, I have used cost-sensitive learning by assigning class weightage (~{0:1, 1:10}). I have not used random-upsampling/SMOTE as it would increase the data size and I do not have much memory. Also, since random-down-sampling discards information which might be important and would result in bias. 
-
-Since, we can hack the F1 score by changing the threshold, I relied on AUC Score for model evaluation. The performance of both of these models is shown below using Confusion Matrix, ROC curve and classification report. The feature important plot from XGBoost model is also shown to understand important features which help predict product's reorder. The performance of both models is almost similar and XGBoost slightly performs better in terms of ROC-AUC.
 
 ## Future Work
 
